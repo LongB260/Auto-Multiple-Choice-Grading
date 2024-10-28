@@ -1,24 +1,65 @@
-Summary: The process from finding contours to determining answer positions in the code begins with detecting contours in the edge-processed image and filtering for the contour with four points to identify the test area. Next, the image is transformed to a bird's eye view for easier processing. The image is then thresholded to create a binary image, allowing for the identification and storage of contours corresponding to appropriately sized answer choices. These contours are sorted top to bottom and analyzed to find which bubble is marked the most. Finally, the code compares the selected bubble to the correct answer and calculates the score based on the accuracy of the responses.
-1. Create a New Environment (Optional)
-While not mandatory, it's a good practice to create a new environment to keep dependencies isolated:
-conda create -n grading-env python=3.8
-Then activate the environment:
-conda activate grading-env
 
-2. Install Required Packages
-Install the necessary libraries using pip or conda:
-conda install -c conda-forge opencv imutils numpy pandas
-pip install pytesseract
+# Auto Multiple-Choice Grading System
 
-3. Install Tesseract OCR
-If you’re using pytesseract, you also need to install Tesseract OCR. Download and install it from the Tesseract GitHub page and add the path to your system's PATH environment variable.
+This project is an automated grading system for multiple-choice exams using images, utilizing OpenCV for image processing. This guide will walk you through setting up and running the project within a Conda environment.
 
-4. Create a Python File
-Open a code editor (such as VSCode or Jupyter Notebook) and paste the code into a Python file (e.g., grading.py).
+## Setup Instructions
 
-5. Run the Code
-Execute the script using the following command in your terminal:
-python main.py
+### 1. Clone the Repository
+First, clone the repository (or download the code) to your local machine:
+```bash
+git clone https://github.com/your-username/auto-multiple-choice-grading.git
+cd auto-multiple-choice-grading
+```
 
-6. Check Results
-After running the code, check the folder containing the images to see if the results have been saved.
+### 2. Create and Activate Conda Environment
+Create a Conda environment for the project with the necessary dependencies:
+
+```bash
+conda create -n grading_env python=3.8
+conda activate grading_env
+```
+
+### 3. Install Dependencies
+Install the required Python libraries within the environment:
+
+```bash
+conda install -c conda-forge opencv
+conda install -c conda-forge imutils numpy
+```
+
+*Alternatively*, you can use a `requirements.txt` file if provided:
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure the Image Directory
+Update the `folder_path` variable in the code to point to the directory containing your test images:
+```python
+folder_path = r'path_to_your_image_folder'
+```
+
+### 5. Run the Code
+With the environment activated and `folder_path` configured, you can now run the grading code:
+
+```bash
+python grade_images.py
+```
+
+This will process each image in the specified directory, grade it, and save the results.
+
+## Viewing Results
+
+- **Score Output**: A CSV file named `score.csv` will be generated in the project directory, recording scores for each graded image.
+- **Graded Images**: Each graded image will be saved in the specified folder with the prefix `graded_`.
+  
+## Closing Notes
+
+To deactivate the environment once you’re finished:
+```bash
+conda deactivate
+```
+
+### Additional Tips
+- Ensure that your images are correctly formatted and of sufficient quality for accurate grading.
+- Run `conda env list` to verify that `grading_env` is available after setup.
